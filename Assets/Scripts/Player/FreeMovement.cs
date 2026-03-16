@@ -18,7 +18,6 @@ public class FreeMovement : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lastMoveDirection = Vector2.right;
     private Animator animator;
-    private GroundTemperatureByTilemap temperatureSystem;
 
     private bool isDashing = false;
     public bool IsDashing => isDashing;
@@ -28,7 +27,6 @@ public class FreeMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        temperatureSystem = GetComponent<GroundTemperatureByTilemap>();
     }
 
     void Update()
@@ -69,8 +67,6 @@ public class FreeMovement : MonoBehaviour
     {
         isDashing = true;
         dashCooldownTimer = dashCooldown;
-
-        temperatureSystem?.ApplyDashTemperature(dashTemperatureCost);
 
         float elapsed = 0f;
         while (elapsed < dashDuration)
