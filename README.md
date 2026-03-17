@@ -1,6 +1,6 @@
 # Inventory - Lab 4
 
-Video: 
+Video: https://youtu.be/Cw4GGHj032c
 
 ## Controles
 - **W, A, S, D** – Movimiento
