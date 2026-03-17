@@ -12,7 +12,6 @@ public class FreeMovement : MonoBehaviour
     [SerializeField] private float dashSpeed = 15f;
     [SerializeField] private float dashDuration = 0.15f;
     [SerializeField] private float dashCooldown = 1f;
-    [SerializeField] private int dashTemperatureCost = 1;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;

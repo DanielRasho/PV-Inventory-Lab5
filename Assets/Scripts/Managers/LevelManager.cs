@@ -1,119 +1,53 @@
-using System;
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private int coinsRequired;
+    public static LevelManager Instance;
 
-    [SerializeField] private GameObject victoryUI;
-    private int coins = 0;
+    public List<InventoryEntry> inventory = new List<InventoryEntry>();
 
-    [SerializeField] private int informesRequired;
-    private int informes = 0;
-    public int Informes => informes;
+    private Dictionary<Item.PickupType, InventoryEntry> lookup =
+        new Dictionary<Item.PickupType, InventoryEntry>();
 
-    private bool informeImpreso = false;
-    public bool InformeImpreso => informeImpreso;
+    private int money = 0;
 
-    [SerializeField] private Toggle entregarCafeToggle;
-    [SerializeField] private Toggle informeToggle;
-    [SerializeField] private Toggle imprimirInformeToggle;
-    
-
-    public bool tieneCafe = false;
-    public bool cafeEntregado = false;
-
-    public bool TieneCafe => tieneCafe;
-    public bool CafeEntregado => cafeEntregado;
-
-
-    public void Start()
+    private void Awake()
     {
-        if (informeToggle != null) informeToggle.isOn = false;
-        if (imprimirInformeToggle != null) imprimirInformeToggle.isOn = false;
-        if (entregarCafeToggle != null) entregarCafeToggle.isOn = false;
+        Instance = this;
     }
 
-
-    // ---- COINS -----
-    public int Coins
+    private void Start()
     {
-        get { return coins; }
+        Item.OnItemCollected += ItemCollected;
     }
 
-    public void AddCoin()
+    private void ItemCollected(Item item)
     {
-        if (coins < coinsRequired)
-            coins++;
-        Debug.Log("Coin Added: " + coins);
-    }
-
-    private void FixedUpdate()
-    {
-        if (informes == informesRequired && CafeEntregado == true && informeImpreso == true)
+        if (item.data.pickupType == Item.PickupType.Money)
         {
-            victoryUI.SetActive(true);
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-
-#else
-        Application.Quit();
-
-#endif
+            money += (item as MoneyItem).Amount;
+            moneyUI.Instance.updateCounter(money);
+            return;
         }
+
+        if (lookup.ContainsKey(item.data.pickupType))
+        {
+            lookup[item.data.pickupType].count++;
+        }
+        else
+        {
+            InventoryEntry entry = new InventoryEntry
+            {
+                itemName = item.data.name,
+                icon = item.data.icon,
+                count = 1
+            };
+
+            inventory.Add(entry);
+            lookup[item.data.pickupType] = entry;
+        }
+
+        HotbarUI.Instance.UpdateHotbar(inventory);
     }
-
-    // --- imprimir ---
-    public void MarcarInformeImpreso()
-    {
-        if (informeImpreso)
-            return;
-
-        informeImpreso = true;
-
-        if (imprimirInformeToggle != null)
-            imprimirInformeToggle.isOn = true;
-
-        Debug.Log("Informe impreso");
-    }
-
-    // --- Informe ---
-    public void AddInforme()
-    {
-        if (informes < informesRequired)
-            informes++;
-
-        Debug.Log("Informe recogido: " + informes);
-
-        if (informes >= informesRequired)
-            informeToggle.isOn = true;
-    }
-
-    //--- cafe ---
-    public void RecogerCafe()
-    {
-        if (tieneCafe || cafeEntregado)
-            return;
-
-        tieneCafe = true;
-        Debug.Log("Cafe recogido");
-
-    }
-
-    public void EntregarCafe()
-    {
-        if (!tieneCafe || cafeEntregado)
-            return;
-
-        tieneCafe = false;
-        cafeEntregado = true;
-
-        Debug.Log("Cafe entregado a la jefa");
-
-        if (entregarCafeToggle != null)
-            entregarCafeToggle.isOn = true;
-    }
-
 }

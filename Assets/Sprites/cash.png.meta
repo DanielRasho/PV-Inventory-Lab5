@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 25dde01e59e83ba4ea4e518d93888239
+guid: 75938bb79f1a5bd449ed5c2880b339f7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8205950651708530623
-    second: flecha_0
+      213: 9062607142165174483
+    second: cash_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: flecha_0
+      name: cash_0
       rect:
         serializedVersion: 2
-        x: 218
-        y: 158
-        width: 259
-        height: 59
+        x: 0
+        y: 0
+        width: 301
+        height: 291
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fbfd87704a461e170800000000000000
-      internalID: 8205950651708530623
+      spriteID: 3d85ca71e29d4cd70800000000000000
+      internalID: 9062607142165174483
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      flecha_0: 8205950651708530623
+      cash_0: 9062607142165174483
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
