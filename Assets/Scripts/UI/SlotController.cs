@@ -8,7 +8,7 @@ public class HotbarSlot : MonoBehaviour
     public Image icon;
     public TMP_Text name;
 
-    private void Start()
+    private void Awake()
     {
         icon.enabled = false;
         name.text = "";

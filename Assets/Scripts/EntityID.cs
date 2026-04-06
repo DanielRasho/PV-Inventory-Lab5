@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 [ExecuteAlways]
-public class UniqueID : MonoBehaviour
+public class EntityID : MonoBehaviour
 {
     [SerializeField] private string id;
 
@@ -39,7 +39,7 @@ public class UniqueID : MonoBehaviour
 
     private void EnsureUnique()
     {
-        var objects = FindObjectsOfType<UniqueID>();
+        var objects = FindObjectsOfType<EntityID>();
 
         foreach (var obj in objects)
         {
