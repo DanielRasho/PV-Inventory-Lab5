@@ -1,6 +1,6 @@
-# Inventory - Lab 4
+# Persistance - Lab 5
 
-Video: https://youtu.be/Cw4GGHj032c
+Video: https://youtu.be/dnxECTlMAK8
 
 ## Controles
 - **W, A, S, D** – Movimiento
