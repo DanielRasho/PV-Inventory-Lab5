@@ -4,9 +4,11 @@ using UnityEngine.UI;
 
 public abstract class Item : MonoBehaviour
 {
+   public virtual string ID => "";
+
    public enum PickupType {Coffee, Money, Contract, Apple, GreenApple }
    
-   public static event Action<Item> OnItemCollected;
+   public static event Action<Item, string> OnItemCollected;
    [SerializeField] public ItemParams data;
 
    protected void OnTriggerEnter2D(Collider2D other)
@@ -24,7 +26,7 @@ public abstract class Item : MonoBehaviour
          AudioManager.Instance.PlayFX(data.GetItemSFX);
       }
       Use();
-      OnItemCollected?.Invoke(this);
+      OnItemCollected?.Invoke(this, ID);
       Destroy(gameObject);
    }
    
